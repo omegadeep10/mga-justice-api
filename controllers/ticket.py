@@ -59,8 +59,8 @@ class TicketList(Resource):
     @marshal_with(ticket_fields)
     def get(self):
         return session.query(TicketModel).all()
-
-    @jwt_required()
+    
+    # no auth required to create a new ticket
     @marshal_with(ticket_fields)
     def post(self):
         print(parser)

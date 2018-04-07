@@ -5,7 +5,7 @@ from db import session
 from datetime import timedelta
 
 app = Flask(__name__, static_folder='static')
-app.config['SECRET_KEY'] = 'tacos_21' # used for signing tokens
+app.config['SECRET_KEY'] = 'tacos_320' # used for signing tokens
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mga2j:justice23@mgajustice-db.cu92s72c9cow.us-east-1.rds.amazonaws.com/mga_justice?charset=utf8&use_unicode=0'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # we don't use track mods, this gets rid of an error in the console
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=3600) # default to JWT expiration of one hour
