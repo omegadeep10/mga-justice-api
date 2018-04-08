@@ -9,6 +9,7 @@ parser.add_argument('first_name', type=str, required=True, help='First Name fiel
 parser.add_argument('last_name', type=str, required=True, help='Last Name field is required.')
 parser.add_argument('email', type=str, required=True, help='Email field is required.')
 parser.add_argument('phone', type=str, help='Phone must be a string')
+parser.add_argument('verified', type=bool, help='Verified must be a boolean')
 
 class Lawyer(Resource):
     @jwt_required()
@@ -19,6 +20,26 @@ class Lawyer(Resource):
             return lawyer
         else:
             abort(404, message="Lawyer with the id " + str(id) + " doesn't exist.")
+
+    @jwt_required()
+    @marshal_with(lawyer_fields)
+    def put(self, id):
+        lawyer = session.query(LawyerModel).filter(LawyerModel.id == id).first()
+
+        if not lawyer:
+            abort(404, message="Lawyer with the id " + str(id) + " doesn't exist.")
+
+        args = parser.parse_args()
+
+        lawyer.first_name = args['first_name']
+        lawyer.last_name = args['last_name']
+        lawyer.email = args['email']
+        lawyer.phone = args['phone']
+        lawyer.verified = args['verified']
+
+        session.commit()
+
+        return lawyer
     
     @jwt_required()
     def delete(self, id):
@@ -39,10 +60,9 @@ class LawyerList(Resource):
     def get(self):
         return session.query(LawyerModel).all()
 
-    @jwt_required()
+
     @marshal_with(lawyer_fields)
     def post(self):
-        print(parser)
         args = parser.parse_args()
         lawyer = session.query(LawyerModel).filter(LawyerModel.email == args['email']).first()
 

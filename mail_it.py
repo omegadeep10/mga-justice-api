@@ -33,7 +33,7 @@ def send_mail(send_from, send_to, subject, text, files = None, server = "smtp.ma
 			msg.attach(part)
 			
 	smtp = smtplib.SMTP(server, 587)
-	smtp.login('postmaster@mg.deeppatel.me', 'ecde30e6611bf6cc08f8ee12e663d4a9-bdd08c82-2759585e')
+	smtp.login('lol@mg.deeppatel.me', 'havefunscrapingthisinvalidpassword')
 	smtp.sendmail(send_from, send_to, msg.as_string())
 	smtp.close()
 	

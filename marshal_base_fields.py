@@ -10,7 +10,8 @@ lawyer_fields = {
     'first_name': fields.String,
     'last_name': fields.String,
     'email': fields.String,
-    'phone': fields.String
+    'phone': fields.String,
+    'verified': fields.Boolean
 }
 
 ticket_fields = {

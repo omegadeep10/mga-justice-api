@@ -21,6 +21,8 @@ class SendTicket(Resource):
 
         if not ticket or not lawyer:
             abort(404, message="Ticket or lawyer do not exist.")
+
+        ticket.closed = True
         
         subject = '[TICKET] You have a new MGA Justice help request from ' + ticket.first_name + " " + ticket.last_name
         body = f"""Hello {lawyer.first_name + " " + lawyer.last_name},
@@ -35,6 +37,8 @@ class SendTicket(Resource):
         Have a nice day.
         """
         
+        # Broken due to mailgun disabled domain :( - reenable when it's working
         send_mail('mgajustice@deeppatel.me', [lawyer.email], subject, body)
+        session.commit()
 
         return {}, 204

@@ -32,11 +32,12 @@ class LawyerModel(Base):
   last_name = Column(String(255), nullable=False)
   email = Column(String(255), nullable=False)
   phone = Column(String(255))
+  verified = Column(Boolean, default=False)
 
   def __str__(self):
     return "Lawyer object: (course='%s')" % self.email
 
-  def __init__(self, first_name, last_name, email, phone):
+  def __init__(self, first_name, last_name, email, phone, verified=False):
     self.first_name = first_name
     self.last_name = last_name
     self.email = email
